@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://crhiggv6tj7m7"]
+[gd_scene load_steps=12 format=3 uid="uid://crhiggv6tj7m7"]
 
 [ext_resource type="Texture2D" uid="uid://b8j0vv4ujiydw" path="res://Images/Icon.png" id="1_7pls2"]
 [ext_resource type="Texture2D" uid="uid://bwehvf8s8gfiq" path="res://Assets/EDFT/icon.png" id="1_jsubu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://gxmon6j1k8ee" path="res://Assets/EDFT/crt.gdshader" id="5_1iesy"]
 [ext_resource type="Script" uid="uid://b2qej3hpj1nks" path="res://Scripts/settings/close_launcher_on_game_start.gd" id="7_5ytym"]
 [ext_resource type="Theme" uid="uid://dylbpkg8vgpub" path="res://Misc/Theme.tres" id="7_elpaq"]
+[ext_resource type="Script" uid="uid://gjnwtu54jrjd" path="res://Scripts/game_version.gd" id="7_k4gcf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1iesy"]
 shader = ExtResource("5_1iesy")
@@ -104,9 +105,20 @@ size_flags_vertical = 6
 alignment = 1
 vertical = true
 
+[node name="Label" type="Label" parent="Tree/EDFT/ChoicesContainer/Choices"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "EDFT"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_k4gcf")
+config_url = "https://raw.githubusercontent.com/sphis-Sinco/EDFT/refs/heads/main/config.json"
+
 [node name="Play" type="Button" parent="Tree/EDFT/ChoicesContainer/Choices"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 16
 text = " Play "
 script = ExtResource("3_rvown")
@@ -115,6 +127,8 @@ scene_path = "EDFT"
 [node name="Download" type="Button" parent="Tree/EDFT/ChoicesContainer/Choices"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 16
 text = " Download "
 script = ExtResource("3_rvown")
