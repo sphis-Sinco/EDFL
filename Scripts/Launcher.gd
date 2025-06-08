@@ -28,7 +28,7 @@ var download_result:int
 
 var game_temp_path:String = "Game.temp"
 var game_path:String = "Game"
-var config_path:String = "Game/LauncherConfig.json"
+var config_path:String = "LauncherConfig.json"
 
 func _enter_tree()->void:
 	# Set custom font, icon and thumbnail
@@ -55,7 +55,7 @@ func _ready()->void:
 	#end
 	
 	# Get current config
-	var current_config:Variant = File.read_json(config_path)
+	var current_config:Variant = File.read_json(game_path+'/'+game_name+'/'+config_path)
 	
 	# Get current version number
 	var current_version:String = ""
@@ -98,7 +98,7 @@ func _ready()->void:
 		# Delete temporary file
 		File.delete(game_temp_path)
 		# Store latest config in downloaded directory
-		File.write_json(config_path, latest_config, "\t")
+		File.write_json(game_path+'/'+game_name+'/'+config_path, latest_config, "\t")
 	#end
 	
 	# Get download exe path
