@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtv2ydbvikxdl"]
+[gd_scene load_steps=7 format=3 uid="uid://dtv2ydbvikxdl"]
 
 [ext_resource type="PackedScene" uid="uid://drpcunkyh6m0k" path="res://Scenes/Main.tscn" id="1_1ubjk"]
 [ext_resource type="Texture2D" uid="uid://bwehvf8s8gfiq" path="res://Assets/EDFT/icon.png" id="2_bvlh7"]
 [ext_resource type="Texture2D" uid="uid://dekiboxr75ecs" path="res://Assets/EDFT/banner.png" id="3_olvvq"]
+[ext_resource type="Shader" uid="uid://gxmon6j1k8ee" path="res://Assets/EDFT/crt.gdshader" id="4_olvvq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chb3e"]
+shader = ExtResource("4_olvvq")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_fd0gx"]
+size = Vector2(640, 360)
 
 [node name="Root" instance=ExtResource("1_1ubjk")]
 
@@ -10,3 +31,8 @@
 game_name = "EDFT"
 icon = ExtResource("2_bvlh7")
 thumbnail = ExtResource("3_olvvq")
+
+[node name="CRT" type="MeshInstance2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_chb3e")
+position = Vector2(320, 180)
+mesh = SubResource("QuadMesh_fd0gx")
