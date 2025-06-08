@@ -1,0 +1,55 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="EDFL"
+run/main_scene="res://Scenes/Main.tscn"
+config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/show_image=false
+config/icon="uid://btvbsbybsluvq"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="zip--launcher"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
+
+[gui]
+
+theme/custom="res://Misc/Theme.tres"
+theme/custom_font="uid://c70o1kgku0ktr"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Translations/Translations.en.translation", "res://Translations/Translations.ja.translation", "res://Translations/Translations.de.translation", "res://Translations/Translations.es.translation", "res://Translations/Translations.fr.translation", "res://Translations/Translations.it.translation", "res://Translations/Translations.ko.translation", "res://Translations/Translations.pt.translation", "res://Translations/Translations.ru.translation", "res://Translations/Translations.zh.translation")
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
