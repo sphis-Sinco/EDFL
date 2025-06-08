@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvva1ajm8gxhh"]
+
+[ext_resource type="PackedScene" uid="uid://drpcunkyh6m0k" path="res://Scenes/Main.tscn" id="1_je6xa"]
+[ext_resource type="Texture2D" uid="uid://catknw3iwjyfe" path="res://Assets/EDFO/icon.png" id="2_je6xa"]
+[ext_resource type="Texture2D" uid="uid://boen8myopece5" path="res://Assets/EDFO/banner.png" id="3_4s5of"]
+[ext_resource type="Shader" uid="uid://gxmon6j1k8ee" path="res://Assets/EDFT/crt.gdshader" id="4_ryahm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chb3e"]
+shader = ExtResource("4_ryahm")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_fd0gx"]
+size = Vector2(640, 360)
+
+[node name="Root" instance=ExtResource("1_je6xa")]
+
+[node name="Launcher" parent="." index="0"]
+config_url = "https://raw.githubusercontent.com/sphis-Sinco/EDFO/refs/heads/master/config.json"
+game_name = "EDFO"
+icon = ExtResource("2_je6xa")
+thumbnail = ExtResource("3_4s5of")
+
+[node name="CRT" type="MeshInstance2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_chb3e")
+position = Vector2(320, 180)
+mesh = SubResource("QuadMesh_fd0gx")

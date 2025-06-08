@@ -2,10 +2,12 @@ extends Tree
 
 @onready var settings = $Settings
 @onready var edft = $EDFT
+@onready var edfo = $EDFO
 
 @onready var tabs = [
 	settings,
-	edft
+	edft,
+	edfo
 ]
 @onready var tab_bar = $"../TabContainer/TabBar"
 
@@ -18,4 +20,6 @@ func _ready():
 func _process(delta):
 	settings.visible = tab_bar.current_tab == 0
 	edft.visible = tab_bar.current_tab == 1
+	edfo.visible = tab_bar.current_tab == 2
+	
 	Global.current_tab = tab_bar.current_tab

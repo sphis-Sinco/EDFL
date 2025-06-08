@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://crhiggv6tj7m7"]
+[gd_scene load_steps=13 format=3 uid="uid://crhiggv6tj7m7"]
 
 [ext_resource type="Texture2D" uid="uid://b8j0vv4ujiydw" path="res://Images/Icon.png" id="1_7pls2"]
 [ext_resource type="Texture2D" uid="uid://bwehvf8s8gfiq" path="res://Assets/EDFT/icon.png" id="1_jsubu"]
 [ext_resource type="Texture2D" uid="uid://dekiboxr75ecs" path="res://Assets/EDFT/banner.png" id="2_c2ha2"]
+[ext_resource type="Texture2D" uid="uid://catknw3iwjyfe" path="res://Assets/EDFO/icon.png" id="3_2fbhy"]
 [ext_resource type="Script" uid="uid://b2cxpmwd7jf6k" path="res://Scripts/navigationUIManager.gd" id="3_qrhyn"]
 [ext_resource type="Script" uid="uid://xoqloia3r6cu" path="res://Scripts/menu_button.gd" id="3_rvown"]
 [ext_resource type="Shader" uid="uid://gxmon6j1k8ee" path="res://Assets/EDFT/crt.gdshader" id="5_1iesy"]
 [ext_resource type="Script" uid="uid://b2qej3hpj1nks" path="res://Scripts/settings/close_launcher_on_game_start.gd" id="7_5ytym"]
-[ext_resource type="Theme" uid="uid://dylbpkg8vgpub" path="res://Misc/Theme.tres" id="7_elpaq"]
 [ext_resource type="Script" uid="uid://gjnwtu54jrjd" path="res://Scripts/game_version.gd" id="7_k4gcf"]
+[ext_resource type="Texture2D" uid="uid://boen8myopece5" path="res://Assets/EDFO/banner.png" id="11_m2g5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1iesy"]
 shader = ExtResource("5_1iesy")
@@ -32,6 +33,11 @@ size = Vector2(640, 296)
 
 [node name="Navigate" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 640.0
 offset_bottom = 64.0
@@ -46,7 +52,7 @@ tab_0/icon = ExtResource("1_7pls2")
 tab_1/title = "EDFT"
 tab_1/icon = ExtResource("1_jsubu")
 tab_2/title = "EDFO"
-tab_2/disabled = true
+tab_2/icon = ExtResource("3_2fbhy")
 metadata/_tab_index = 0
 
 [node name="Tree" type="Tree" parent="."]
@@ -62,23 +68,26 @@ grow_vertical = 2
 script = ExtResource("3_qrhyn")
 
 [node name="Settings" type="TabContainer" parent="Tree"]
-visible = false
+layout_direction = 2
 layout_mode = 0
-offset_right = 672.0
-offset_bottom = 328.0
+offset_right = 308.0
+offset_bottom = 20.0
 current_tab = 0
 clip_tabs = false
 tabs_visible = false
 
-[node name="CheckBox" type="CheckBox" parent="Tree/Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tree/Settings"]
 layout_mode = 2
-theme = ExtResource("7_elpaq")
+metadata/_tab_index = 0
+
+[node name="CheckBox" type="CheckBox" parent="Tree/Settings/VBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Close launcher on game start"
 script = ExtResource("7_5ytym")
-metadata/_tab_index = 0
 
 [node name="EDFT" type="TabContainer" parent="Tree"]
+visible = false
 layout_mode = 0
 offset_left = -320.0
 offset_top = -148.0
@@ -112,6 +121,7 @@ text = "EDFT"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_k4gcf")
+game_name = "EDFT"
 config_url = "https://raw.githubusercontent.com/sphis-Sinco/EDFT/refs/heads/main/config.json"
 
 [node name="Play" type="Button" parent="Tree/EDFT/ChoicesContainer/Choices"]
@@ -135,7 +145,66 @@ script = ExtResource("3_rvown")
 scene_path = "EDFT"
 launch = false
 
-[node name="CRT" type="MeshInstance2D" parent="Tree/EDFT"]
+[node name="EDFO" type="TabContainer" parent="Tree"]
+visible = false
+offset_left = -320.0
+offset_top = -148.0
+offset_right = 320.0
+offset_bottom = 148.0
+scale = Vector2(2, 2)
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="Banner" type="Sprite2D" parent="Tree/EDFO"]
+position = Vector2(353.5, 117)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("11_m2g5m")
+
+[node name="ChoicesContainer" type="ScrollContainer" parent="Tree/EDFO"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Choices" type="BoxContainer" parent="Tree/EDFO/ChoicesContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="Tree/EDFO/ChoicesContainer/Choices"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "EDFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_k4gcf")
+game_name = "EDFO"
+config_url = "https://raw.githubusercontent.com/sphis-Sinco/EDFO/refs/heads/master/config.json"
+
+[node name="Play" type="Button" parent="Tree/EDFO/ChoicesContainer/Choices"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = " Play "
+script = ExtResource("3_rvown")
+scene_path = "EDFO"
+
+[node name="Download" type="Button" parent="Tree/EDFO/ChoicesContainer/Choices"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = " Download "
+script = ExtResource("3_rvown")
+scene_path = "EDFO"
+launch = false
+
+[node name="CRT" type="MeshInstance2D" parent="."]
 material = SubResource("ShaderMaterial_1iesy")
-position = Vector2(319, 148)
+position = Vector2(318, 211)
+scale = Vector2(2, 2)
 mesh = SubResource("QuadMesh_5ytym")

@@ -15,7 +15,7 @@ config/tags=PackedStringArray("edf", "june2025", "launcher")
 run/main_scene="uid://crhiggv6tj7m7"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/show_image=false
-config/icon="uid://btvbsbybsluvq"
+config/icon="uid://buqeym1ugjtn5"
 
 [autoload]
 

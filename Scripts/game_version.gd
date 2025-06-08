@@ -1,12 +1,19 @@
 extends Label
 
-@export var game_name = 'EDFT'
+@export var game_name = ''
 @export var config_url:String
 
 var game_version = ''
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if game_name == '':
+		event("MISSING_GAME_NAME")
+		return
+	elif config_url == '':
+		event("MISSING_CONFIG_URL")
+		return
+	
 	# Fetch config
 	event("FETCHING_CONFIG")
 	var latest_config:Variant = await Launcher.download_to_json_variant(config_url)
@@ -24,7 +31,7 @@ func _ready():
 	var current_version:String = ""
 	if current_config != null:
 		current_version = current_config.get("version")
-		if current_version == null:
+		if current_version == null or current_version == '':
 			event("MISSING_VERSION")
 			return
 		#end
@@ -33,7 +40,7 @@ func _ready():
 	# Get latest version number
 	var latest_version:String = latest_config.get("version")
 	if latest_version == null:
-		event("MISSING_VERSION")
+		event("FAILED_FETCH_CONFIG")
 		return
 	#end
 	
