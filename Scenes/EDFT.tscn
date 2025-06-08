@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtv2ydbvikxdl"]
 
 [ext_resource type="PackedScene" uid="uid://drpcunkyh6m0k" path="res://Scenes/Main.tscn" id="1_1ubjk"]
-[ext_resource type="Texture2D" uid="uid://bpqys1hotk3ty" path="res://Assets/EDFT/icon.png" id="2_bvlh7"]
-[ext_resource type="Texture2D" uid="uid://bhpmt44hslp0x" path="res://Assets/EDFT/banner.png" id="3_olvvq"]
+[ext_resource type="Texture2D" uid="uid://bwehvf8s8gfiq" path="res://Assets/EDFT/icon.png" id="2_bvlh7"]
+[ext_resource type="Texture2D" uid="uid://dekiboxr75ecs" path="res://Assets/EDFT/banner.png" id="3_olvvq"]
 
 [node name="Root" instance=ExtResource("1_1ubjk")]
 

@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="EDFL"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="uid://crhiggv6tj7m7"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/show_image=false
 config/icon="uid://btvbsbybsluvq"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
 
 [debug]
 
@@ -24,8 +28,7 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -52,4 +55,5 @@ locale/translations=PackedStringArray("res://Translations/Translations.en.transl
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true

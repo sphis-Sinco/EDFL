@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://drpcunkyh6m0k"]
 
-[ext_resource type="Script" uid="uid://clnprk4bsywb8" path="res://Scripts/Launcher.gd" id="1_rum8j"]
-[ext_resource type="FontFile" uid="uid://c70o1kgku0ktr" path="res://Assets/fonts/nokiafc22.ttf" id="2_pbw6q"]
+[ext_resource type="Script" uid="uid://bnate4raa6tai" path="res://Scripts/Launcher.gd" id="1_rum8j"]
+[ext_resource type="FontFile" uid="uid://cc45f1s8irsng" path="res://Assets/fonts/nokiafc22.ttf" id="2_pbw6q"]
 [ext_resource type="Theme" uid="uid://dylbpkg8vgpub" path="res://Misc/Theme.tres" id="2_vmoyk"]
-[ext_resource type="Texture2D" uid="uid://sqsyo3wn62nc" path="res://Assets/Icon 4x.png" id="3_v1gob"]
-[ext_resource type="Texture2D" uid="uid://buf2uws84lmhw" path="res://Images/Banner.png" id="4_pbw6q"]
+[ext_resource type="Texture2D" uid="uid://bnhnly424wouc" path="res://Assets/Icon 4x.png" id="3_v1gob"]
+[ext_resource type="Texture2D" uid="uid://d14g4vwlxb25c" path="res://Images/Banner.png" id="4_pbw6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfqnu"]
 bg_color = Color(0, 0, 0, 1)
@@ -13,7 +13,6 @@ bg_color = Color(0, 0, 0, 1)
 font_size = 28
 
 [sub_resource type="LabelSettings" id="LabelSettings_tqowx"]
-font_size = 20
 
 [node name="Root" type="Node"]
 
@@ -27,10 +26,10 @@ theme = ExtResource("2_vmoyk")
 thumbnail_rect = NodePath("../Background/Thumbnail")
 log_label = NodePath("../Background/Log")
 progress_bar = NodePath("../Background/ProgressBar")
-choice_box = NodePath("../Background/ChoiceBox")
-message_label = NodePath("../Background/ChoiceBox/ScrollMessage/Message")
-retry_button = NodePath("../Background/ChoiceBox/ScrollChoices/Choices/RetryButton")
-quit_button = NodePath("../Background/ChoiceBox/ScrollChoices/Choices/QuitButton")
+choice_box = NodePath("../Background/Message Box")
+message_label = NodePath("../Background/Message Box/ScrollMessage/Message")
+retry_button = NodePath("../Background/Message Box/Failed/Choices/RetryButton")
+quit_button = NodePath("../Background/Message Box/Failed/Choices/QuitButton")
 
 [node name="Background" type="Panel" parent="."]
 anchors_preset = 15
@@ -78,7 +77,7 @@ grow_horizontal = 2
 grow_vertical = 0
 max_value = 1.0
 
-[node name="ChoiceBox" type="Panel" parent="Background"]
+[node name="Message Box" type="Panel" parent="Background"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -94,7 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 
-[node name="ScrollMessage" type="ScrollContainer" parent="Background/ChoiceBox"]
+[node name="ScrollMessage" type="ScrollContainer" parent="Background/Message Box"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,17 +105,18 @@ offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Message" type="Label" parent="Background/ChoiceBox/ScrollMessage"]
+[node name="Message" type="Label" parent="Background/Message Box/ScrollMessage"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
 text = "hello"
 label_settings = SubResource("LabelSettings_tqowx")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="ScrollChoices" type="ScrollContainer" parent="Background/ChoiceBox"]
+[node name="Failed" type="ScrollContainer" parent="Background/Message Box"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -127,18 +127,20 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Choices" type="BoxContainer" parent="Background/ChoiceBox/ScrollChoices"]
+[node name="Choices" type="BoxContainer" parent="Background/Message Box/Failed"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="RetryButton" type="Button" parent="Background/ChoiceBox/ScrollChoices/Choices"]
+[node name="RetryButton" type="Button" parent="Background/Message Box/Failed/Choices"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Retry"
 
-[node name="QuitButton" type="Button" parent="Background/ChoiceBox/ScrollChoices/Choices"]
+[node name="QuitButton" type="Button" parent="Background/Message Box/Failed/Choices"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Quit"

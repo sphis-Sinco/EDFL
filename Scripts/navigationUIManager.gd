@@ -1,0 +1,20 @@
+extends Tree
+
+@onready var settings = $Settings
+@onready var edft = $EDFT
+
+@onready var tabs = [
+	settings,
+	edft
+]
+@onready var tab_bar = $"../TabContainer/TabBar"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	settings.visible = tab_bar.current_tab == 0
+	edft.visible = tab_bar.current_tab == 1

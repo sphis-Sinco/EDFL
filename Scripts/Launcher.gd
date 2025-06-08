@@ -76,6 +76,7 @@ func _ready()->void:
 	
 	# Download latest version if outdated
 	if current_version != latest_version:
+		print('OUTDATED VERSION ('+current_version+'!='+latest_version+')')
 		# Get download URL
 		var download_url:String = latest_config.get(str(platform_name(), "_url"))
 		if download_url == null:
@@ -108,19 +109,26 @@ func _ready()->void:
 	#end
 	# Run game executable
 	print('launch path: '+game_path+'/'+game_name.path_join(download_exe_path))
-	var launch_success:int = OS.create_process(game_path+'/'+game_name.path_join(download_exe_path), [
-		"--",
-		str("--launcher_path=", OS.get_executable_path()),
-		str("--launcher_config_url=", config_url),
-		str("--launcher_game_version=", latest_version),
-	])
-	if launch_success < 0:
-		await display_error("FAILED_LAUNCH")
-		return
+	if Global.launch_game:
+		var launch_success:int = OS.create_process(game_path+'/'+game_name.path_join(download_exe_path), [
+			"--",
+			str("--launcher_path=", OS.get_executable_path()),
+			str("--launcher_config_url=", config_url),
+			str("--launcher_game_version=", latest_version),
+		])
+		if launch_success < 0:
+			await display_error("FAILED_LAUNCH")
+			return
+	else:
+		get_tree().change_scene_to_file('res://Scenes/Navigate.tscn')
 	#end
 	
 	# Close launcher
-	get_tree().quit()
+	if Global.launch_game:
+		if Global.close_launcher_on_start:
+			get_tree().quit()
+		else:
+			get_tree().change_scene_to_file('res://Scenes/Navigate.tscn')
 #end
 
 ## Downloads the file to memory and returns it as a byte array, or an empty array if failed.

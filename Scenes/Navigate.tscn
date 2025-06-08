@@ -1,3 +1,120 @@
-[gd_scene format=3 uid="uid://crhiggv6tj7m7"]
+[gd_scene load_steps=9 format=3 uid="uid://crhiggv6tj7m7"]
+
+[ext_resource type="Texture2D" uid="uid://b8j0vv4ujiydw" path="res://Images/Icon.png" id="1_7pls2"]
+[ext_resource type="Texture2D" uid="uid://bwehvf8s8gfiq" path="res://Assets/EDFT/icon.png" id="1_jsubu"]
+[ext_resource type="Texture2D" uid="uid://dekiboxr75ecs" path="res://Assets/EDFT/banner.png" id="2_c2ha2"]
+[ext_resource type="Script" uid="uid://b2cxpmwd7jf6k" path="res://Scripts/navigationUIManager.gd" id="3_qrhyn"]
+[ext_resource type="Script" uid="uid://xoqloia3r6cu" path="res://Scripts/menu_button.gd" id="3_rvown"]
+[ext_resource type="Shader" uid="uid://gxmon6j1k8ee" path="res://Assets/EDFT/crt.gdshader" id="5_1iesy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1iesy"]
+shader = ExtResource("5_1iesy")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ytym"]
+size = Vector2(640, 296)
 
 [node name="Navigate" type="Node2D"]
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 64.0
+current_tab = 0
+
+[node name="TabBar" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+current_tab = 0
+tab_count = 3
+tab_0/title = "Settings"
+tab_0/icon = ExtResource("1_7pls2")
+tab_1/title = "EDFT"
+tab_1/icon = ExtResource("1_jsubu")
+tab_2/title = "EDFO"
+tab_2/disabled = true
+metadata/_tab_index = 0
+
+[node name="Tree" type="Tree" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 63.0
+offset_right = 640.0
+offset_bottom = 359.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_qrhyn")
+
+[node name="EDFT" type="TabContainer" parent="Tree"]
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 328.0
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="Banner" type="Sprite2D" parent="Tree/EDFT"]
+position = Vector2(336, 60)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_c2ha2")
+
+[node name="ChoicesContainer" type="ScrollContainer" parent="Tree/EDFT"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Choices" type="BoxContainer" parent="Tree/EDFT/ChoicesContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+vertical = true
+
+[node name="Play" type="Button" parent="Tree/EDFT/ChoicesContainer/Choices"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = " Play "
+script = ExtResource("3_rvown")
+scene_path = "EDFT"
+
+[node name="Download" type="Button" parent="Tree/EDFT/ChoicesContainer/Choices"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = " Download "
+script = ExtResource("3_rvown")
+scene_path = "EDFT"
+launch = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Tree/EDFT"]
+material = SubResource("ShaderMaterial_1iesy")
+position = Vector2(319, 148)
+mesh = SubResource("QuadMesh_5ytym")
+
+[node name="Settings" type="TabContainer" parent="Tree"]
+visible = false
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 328.0
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="CheckBox" type="CheckBox" parent="Tree/Settings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Close launcher on game start"
+metadata/_tab_index = 0
