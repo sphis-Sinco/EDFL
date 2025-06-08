@@ -76,7 +76,7 @@ func _ready()->void:
 	
 	# Download latest version if outdated
 	if current_version != latest_version:
-		print('OUTDATED VERSION ('+current_version+'!='+latest_version+')')
+		# print('OUTDATED VERSION ('+current_version+'!='+latest_version+')')
 		# Get download URL
 		var download_url:String = latest_config.get(str(platform_name(), "_url"))
 		if download_url == null:
@@ -222,38 +222,42 @@ func download_to_file(link:String, path:String, show_progress:bool)->Error:
 
 ## Sets the display label to the text.
 func display(text:String = "")->void:
-	log_label.text = text
+	if log_label:
+		log_label.text = text
 #end
 
 ## Prompts an error popup with the text.
 func display_error(text:String)->void:
-	message_label.text = text
-	choice_box.show()
-	
-	choice = -1
-	var retry := func()->void:
-		choice = 0
-	#end
-	var quit := func()->void:
-		choice = 1
-	#end
-	retry_button.pressed.connect(retry)
-	quit_button.pressed.connect(quit)
-	
-	while choice < 0:
-		await get_tree().process_frame
-	#end
-	
-	retry_button.pressed.disconnect(retry)
-	quit_button.pressed.disconnect(quit)
-	
-	choice_box.hide()
-	message_label.text = ""
-	
-	match choice:
-		0: get_tree().reload_current_scene()
-		1: get_tree().quit()
-	#end
+	if message_label:
+		message_label.text = text
+		choice_box.show()
+		
+		choice = -1
+		var retry := func()->void:
+			choice = 0
+		#end
+		var quit := func()->void:
+			choice = 1
+		#end
+		retry_button.pressed.connect(retry)
+		quit_button.pressed.connect(quit)
+		
+		while choice < 0:
+			await get_tree().process_frame
+		#end
+		
+		retry_button.pressed.disconnect(retry)
+		quit_button.pressed.disconnect(quit)
+		
+		choice_box.hide()
+		message_label.text = ""
+		
+		match choice:
+			0: get_tree().reload_current_scene()
+			1: get_tree().change_scene_to_file("res://Scenes/Navigate.tscn")
+		#end
+	else:
+		get_tree().change_scene_to_file("res://Scenes/Navigate.tscn")
 #end
 
 ## Returns the current export platform according to export features.
