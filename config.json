@@ -1,0 +1,7 @@
+{
+  "version": "2",
+  "windows_url": "https://github.com/sphis-Sinco/EDFL/releases/download/2/windows.zip",
+  "windows_exe": "windows/EDFT.exe",
+  "linux_url": "https://github.com/sphis-Sinco/EDFL/releases/download/2/linux.zip",
+  "linux_exe": "linux/EDFT.x86_64"
+}
